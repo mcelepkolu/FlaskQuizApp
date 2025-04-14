@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Results{% endblock %}
+
+{% block content %}
+<div class="results-container">
+    <div class="card text-center">
+        <div class="card-header bg-primary text-white">
+            <h2>Quiz Results: {{ quiz.title }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="score-display">
+                <h3 class="mb-4">Your Score: {{ score }}/{{ total }}</h3>
+
+                <div class="row score-details">
+                    <!-- Current Attempt -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-header">Current Attempt</div>
+                            <div class="card-body">
+                                <h4>{{ score }}/{{ total }}</h4>
+                                <p>{{ (score / total * 100)}}%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overall Highest Score -->
+                    {% if highest_score %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-header">Highest Score</div>
+                            <div class="card-body">
+                                <h4>{{ highest_score.score }}/{{ highest_score.total_questions }}</h4>
+                                <p>{{ (highest_score.score / highest_score.total_questions * 100)|round(1) }}%</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- User's Best -->
+                    {% if user_highest_score %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-header">Your Best Score</div>
+                            <div class="card-body">
+                                <h4>{{ user_highest_score.score }}/{{ user_highest_score.total_questions }}</h4>
+                                <p>{{ (user_highest_score.score / user_highest_score.total_questions * 100)|round(1) }}%</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="feedback mt-4">
+                {% if score == total %}
+                    <div class="alert alert-success">Perfect score! Congratulations!</div>
+                {% elif score >= total * 0.7 %}
+                    <div class="alert alert-info">Great job! You've done well.</div>
+                {% elif score >= total * 0.5 %}
+                    <div class="alert alert-warning">Good effort! Keep studying to improve.</div>
+                {% else %}
+                    <div class="alert alert-danger">You might want to review this topic and try again.</div>
+                {% endif %}
+            </div>
+
+            <div class="actions mt-4">
+                <a href="{{ url_for('quiz', quiz_id=quiz.id) }}" class="btn btn-primary me-2">Take Quiz Again</a>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Quizzes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

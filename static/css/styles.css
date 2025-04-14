@@ -1,0 +1,95 @@
+/* Main styles for quiz website */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header scores display */
+.scores-container {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.score-item {
+    margin-bottom: 2px;
+}
+
+.score-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.score-value {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Quiz cards */
+.question-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.question-card .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 10px 10px 0 0;
+}
+
+/* Quiz options */
+.options label {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+    display: block;
+    width: 100%;
+}
+
+.options input:checked + label {
+    background-color: rgba(13, 110, 253, 0.1);
+    font-weight: bold;
+}
+
+/* Results page */
+.results-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.score-display {
+    margin-bottom: 2rem;
+}
+
+/* Quiz header */
+.quiz-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.quiz-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}

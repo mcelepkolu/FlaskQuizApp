@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Python Quiz{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Python Quiz</a>
+
+            <div class="scores-container ms-auto me-3">
+                {% if highest_score %}
+                <div class="score-item">
+                    <span class="score-label">Highest Score:</span>
+                    <span class="score-value">{{ highest_score.score }}/{{ highest_score.total_questions }}</span>
+                </div>
+                {% endif %}
+
+                {% if user_highest_score %}
+                <div class="score-item">
+                    <span class="score-label">Your Best:</span>
+                    <span class="score-value">{{ user_highest_score.score }}/{{ user_highest_score.total_questions }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="auth-links">
+                {% if current_user.is_authenticated %}
+                <span class="text-light me-2">Hello, {{ current_user.name }}</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-light">Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-sm btn-outline-light me-2">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-sm btn-light">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container text-center">
+            <p>© 2025 Python Quiz Application. Developed by Muhammed CELEPKOLU</p>
+            <p>A dynamic quiz platform to help young people learn Python programming concepts</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
